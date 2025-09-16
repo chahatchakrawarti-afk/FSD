@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #74ebd5, #9face6); /* gradient background */
+      font-family: Arial, sans-serif;
+    }
+
+    .todo-container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 320px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    input {
+      width: 70%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-left: 5px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    li {
+      margin: 8px 0;
+      padding: 8px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tick {
+      background: #ddd;
+    }
+
+    .delete {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h2>My To-Do List</h2>
+
+    <input id="taskInput" type="text" placeholder="Enter task">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      let input = document.getElementById("taskInput");
+      let task = input.value.trim();
+      if (task === "") return;
+
+      let li = document.createElement("li");
+      li.textContent = task;
+
+     
+      let tickBtn = document.createElement("button");
+      tickBtn.textContent = "✔";
+      tickBtn.className = "tick";
+      tickBtn.onclick = function() {
+        tickBtn.style.backgroundColor = "green";
+        
+      };
+
+     
+      let delBtn = document.createElement("button");
+      delBtn.textContent = "✖";
+      delBtn.className = "delete";
+      delBtn.onclick = function() {
+        delBtn.style.backgroundColor = "red";
+        setTimeout(() => li.remove(), 500);
+      };
+
+      li.appendChild(tickBtn);
+      li.appendChild(delBtn);
+      document.getElementById("taskList").appendChild(li);
+
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
