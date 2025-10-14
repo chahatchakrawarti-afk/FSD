@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call back </title>
+</head>
+<body>
+<h1>Call back function</h1>
+<button id="startButton">Run examples</button>
+<script>
+   function doTaskCallback(taskName, callback) {
+       console.log("Starting callback task: taskName");
+       setTimeout(() => {
+           console.log("Completed task: taskName");
+           if (callback) callback();
+       }, 2000);
+
+   }
+
+function doTaskPromise(Taskname ) {
+    return new Promise((resolve, reject) => {
+        console.log("Starting promise task: Taskname");
+        setTimeout(() => {
+            console.log("Completed task: Taskname");
+            resolve();
+        }, 2000);
+    });
+}
+
+document.getElementById("startButton").addEventListener("click", () => {
+    console.clear();
+    console.log("=== Callback Example ===");
+    doTaskCallback("Task 1",function() {
+        console.log("Callback tasks done !\n");
+    });
+    console.log("=== Promise Example ===");
+    doTaskPromise("Task A")
+    .then(() => {
+        console.log(" Task A finished, now starting Task B");
+        return doTaskPromise("Task B");
+    })
+    .then(() => {
+        console.log("All promise tasks done!");
+    });
+});
+</script>
+</body>
+</html>

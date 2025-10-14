@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expense Tracker</title>
+  <style>
+    body {
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      background: #fff;
+      padding: 20px;
+    }
+    h1 { text-align: center; }
+    label { display: block; margin-top: 10px; }
+    input, textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+    }
+    button {
+      margin-top: 12px;
+      width: 100%;
+      padding: 8px;
+      background: #186f1b;
+      color: #fcfafa;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ecd9d9;
+      padding: 6px;
+      text-align: left;
+    }
+    th { background: #fede80; }
+    .total { text-align: right; margin-top: 8px; font-weight: bold; }
+
+    .delete-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Expense Tracker</h1>
+
+    <!-- Form -->
+    <section>
+      <label>Expense Name</label>
+      <input type="text" id="name" placeholder="e.g. Groceries">
+
+      <label>Amount (₹)</label>
+      <input type="number" id="amount" placeholder="e.g. 350">
+
+      <label>Description</label>
+      <textarea id="description" placeholder="e.g. Weekly fruits and vegetables"></textarea>
+
+      <label>Date</label>
+      <input type="date" id="date">
+
+      <button onclick="addExpense()">Add Expense</button>
+    </section>
+
+    <section>
+      <h3>Recent Expenses</h3>
+      <table id="expenseTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="total" id="totalDisplay">Total: ₹0.00</div>
+    </section>
+  </div>
+
+  <script>
+    let expenses = [];
+
+    function addExpense() {
+      const name = document.getElementById("name").value;
+      const amount = parseFloat(document.getElementById("amount").value);
+      const description = document.getElementById("description").value;
+      const date = document.getElementById("date").value;
+
+      if (!name || isNaN(amount) || !date) {
+        alert("Please fill all required fields correctly.");
+        return;
+      }
+
+      expenses.push({ name, amount, description, date });
+      renderTable();
+
+      document.getElementById("name").value = "";
+      document.getElementById("amount").value = "";
+      document.getElementById("description").value = "";
+      document.getElementById("date").value = "";
+    }
+
+    function deleteExpense(index) {
+      expenses.splice(index, 1);
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.querySelector("#expenseTable tbody");
+      tbody.innerHTML = "";
+      let total = 0;
+
+      expenses.forEach((expense, index) => {
+        total += expense.amount;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${expense.name}</td>
+          <td>₹${expense.amount.toFixed(2)}</td>
+          <td>${expense.description}</td>
+          <td>${expense.date}</td>
+          <td><button class="delete-btn" onclick="deleteExpense(${index})">Delete</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      document.getElementById("totalDisplay").textContent = `Total: ₹${total.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

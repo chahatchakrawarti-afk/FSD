@@ -1,0 +1,103 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+
+body {
+  height:100vh;
+  background:#000;
+}
+
+/* Stage centers everything horizontally and vertically */
+.stage {
+  height:100vh;
+  display:flex;
+  flex-direction:column;     /* lamp on top, form below */
+  justify-content:center;    /* vertical center */
+  align-items:center;        /* horizontal center */
+  gap: 40px;                 /* space between lamp and form */
+  position:relative;
+  overflow:hidden;
+}
+
+/* Lamp container (keeps lamp elements aligned) */
+.lamp {
+  width: 1px; /* just a container - actual visible parts are children */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  z-index:1;
+}
+
+/* Wire - thin vertical line centered */
+.lamp-wire {
+  width: 3px;
+  height: 110px;
+  background: linear-gradient(#ddd, #aaa);
+  border-radius:2px;
+  margin-bottom: -6px; /* brings base closer */
+}
+
+/* Lamp base (the bulb holder) */
+.lamp-base {
+  width: 120px;
+  height: 60px;
+  background: #f2f2f2;
+  border-radius: 0 0 50% 50%;
+  transform: translateY(-10px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.6) inset;
+  z-index:2;
+}
+
+/* Big glowing light circle centered under the lamp */
+.lamp-light {
+  width: 420px;
+  height: 220px;
+  background: radial-gradient(circle at 50% 20%,
+              rgba(255,245,200,0.95) 0%,
+              rgba(255,230,150,0.7) 20%,
+              rgba(0,0,0,0.9) 70%);
+  border-radius:50%;
+  filter: blur(30px);
+  margin-top: -110px; /* overlap under the base */
+  z-index:0;
+  opacity:0.9;
+}
+
+/* Login Form - stays centered under the lamp glow */
+.login-form {
+  width: 300px;
+  padding: 1.6em;
+  background: #663300;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  text-align:center;
+  position: relative;
+  z-index:3; /* above glow */
+}
+
+/* form styling */
+.login-form h2 {
+  margin-bottom: 0.8em;
+  color: #E2D3C1;
+  font-size:1.3rem;
+}
+.form-group { margin-bottom: 0.9em; text-align:left; }
+.form-group label { font-size:0.9rem; display:block; color:#E2D3C1; }
+.form-group input {
+  width:100%;
+  padding:8px;
+  margin-top:6px;
+  border:none;
+  border-radius:6px;
+}
+.login-btn {
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  background:#fff;
+  color:#663300;
+  border:none;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+}
