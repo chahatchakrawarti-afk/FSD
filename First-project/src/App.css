@@ -12,10 +12,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #141414aa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #0e0e0eaa);
 }
 
 @keyframes logo-spin {
@@ -38,5 +38,43 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: #a21c1c;
+}
+
+
+.container {
+  text-align: center;
+  margin: 20px auto;
+  width: 80%;
+}
+
+table tr:hover {
+  background-color: #0d0d0e;
+}
+
+.topic-detail {
+  text-align: left;
+  background: #0d0d0d;
+}
+
+
+.container {
+  text-align: center;
+  margin-top: 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+table th {
+  background-color: #111;
+  color: white;
+}
+
+table tr:hover {
+  background-color: #e6f7ff;
+  transition: 0.3s;
 }
