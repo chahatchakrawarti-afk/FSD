@@ -2,12 +2,12 @@ const express = require('express');
  const app = express();
  const port = 8004;
 
-// app.get('/', (req, res) => {
-//     res.send(`
-//         <h1>This is my first server</h1>
-//         <img src="https://image-static.collegedunia.com/public/college_data/images/logos/1587463140logo.jpeg?h=71.7&w=71.7&mode=stretch" alt="ABES Logo" width="200">
-//     `);
-// });
+app.get('/', (req, res) => {
+    res.send(`
+         <h1>This is my first server</h1>
+         <img src="https://image-static.collegedunia.com/public/college_data/images/logos/1587463140logo.jpeg?h=71.7&w=71.7&mode=stretch" alt="ABES Logo" width="200">
+     `);
+ });
 
 // app.listen(port, () => {
 //     console.log(`Server is running at http://localhost:${port}`);
