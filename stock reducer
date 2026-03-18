@@ -1,0 +1,69 @@
+const express = require('express');
+const app = express();
+const port = 5009;
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send("<h1>🚗 Welcome Car Showroom API</h1>");
+});
+
+
+let cars = [
+    { id: 1, name: "Swift", price: 600000 },
+    { id: 2, name: "i20", price: 750000 },
+    { id: 3, name: "Baleno", price: 800000 },
+    { id: 4, name: "Creta", price: 1200000 },
+    { id: 5, name: "Venue", price: 1100000 },
+    { id: 6, name: "City", price: 1300000 },
+    { id: 7, name: "Verna", price: 1400000 },
+    { id: 8, name: "Thar", price: 1600000 },
+    { id: 9, name: "Scorpio", price: 1700000 },
+    { id: 10, name: "Fortuner", price: 3500000 },
+    { id: 11, name: "Innova", price: 2000000 },
+    { id: 12, name: "Nexon", price: 900000 },
+    { id: 13, name: "Punch", price: 650000 },
+    { id: 14, name: "Kushaq", price: 1500000 },
+    { id: 15, name: "Slavia", price: 1400000 }
+];
+
+
+
+app.get('/cars', (req, res) => {
+    res.json({ total: cars.length, data: cars });
+});
+
+
+
+app.post('/cars', (req, res) => {
+    const newCar = req.body;
+    cars.push(newCar);
+    res.status(201).json({ message: "Car added", data: cars });
+});
+
+
+
+app.put('/cars/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const updateData = req.body;
+
+    cars = cars.map(car =>
+        car.id === id ? { ...car, ...updateData } : car
+    );
+
+    res.json({ message: "Car updated", data: cars });
+});
+
+
+
+app.delete('/cars/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    cars = cars.filter(car => car.id !== id);
+    res.json({ message: "Car deleted", data: cars });
+});
+
+
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
